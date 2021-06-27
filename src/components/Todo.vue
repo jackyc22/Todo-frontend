@@ -33,15 +33,19 @@ export default{
       })
     },
     tambahkan:function(){
+      const username=localStorage.getItem('usr')
+      const password=localStorage.getItem('pwd')
       let newItem={Description:this.myText}
-      axios.post('http://localhost:3000/todo',newItem)
+      axios.post('http://localhost:3000/todo',newItem,{headers:{username,password}})
       .then(()=>{
           this.data()
           this.myText=''
       })  
     },
     hapus:function(id){
-      axios.delete(`http://localhost:3000/todo/${id}`)
+      const username=localStorage.getItem('usr')
+      const password=localStorage.getItem('pwd')
+      axios.delete(`http://localhost:3000/todo/${id}`,{headers:{username,password}})
       .then(result=>{
         this.data()
       })
